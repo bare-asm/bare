@@ -1,0 +1,8 @@
+run = "bash -c 'nasm -f elf64 main.asm && ld main.o && ./a.out'"
+
+entrypoint = "main.asm"
+
+hidden = ["a.out"]
+
+[nix]
+channel = "stable-22_11"
