@@ -1,3 +1,3 @@
-%include "std.io.asm"
-%include "utils.asm"
-%include "std.fs.asm"
+%include ".bare/std.io.asm"
+%include ".bare/utils.asm"
+%include ".bare/std.fs.asm"

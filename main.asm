@@ -23,18 +23,13 @@ SECTION .text
 global  _start
 
 _start:
-    stdout    msg
+    stdout    _
     read      file, SIZE, 0
-    ; sub       file, 2
     mov       rax, file
     call      f_strlen
     mov       byte [file + rdi - 1], 0
-    stdout    __
-    mov       rax, file
-    ;;;; mov       rbx, S_FLAGS
-    mov       rbx, 0644
-    mov       rcx, 0q2
-    call      f_open
+    stdout    file
+    open           file, O_RDWR_C, rdi
     ;;;; read      [f], SIZE, 0
     ;;;; mov       [rbx + rax], 0
     ;;;; mov       f, rax
@@ -54,6 +49,10 @@ _start:
     ; syscall
     ; stdout    welcome
     read      f, SIZE, rdi
+    close     rdi
+    mov       rax, f
+    call      f_strlen
+    mov       byte [f + rdi], 10
     stdout    f
     ; stdout    end
     exit      0

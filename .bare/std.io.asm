@@ -1,8 +1,10 @@
 global f_strlen
 global f_stdout
 global stdout
-global stdin
-global f_stdin
+global read
+global write
+global f_read
+global f_write
 
 %macro write 2
     mov  rax, %1
@@ -53,32 +55,6 @@ f_read:
     pop  r9
     ret
 
-%macro stdin 2
-    mov  rdi, 256
-    mov  rsi, 256
-    call f_stdin
-    mov  %1, rdi
-    mov  %2, rsi
-%endmacro
-
-f_stdin:
-    ; Input: None
-    ; Output: rdi - The Input String
-    ;         rsi - The String Length
-    push r8
-    push r9
-    mov  r8, rax
-    mov  r9, rdi
-    mov rdi, 0
-    mov rax, 0
-    syscall
-    mov rdi, rsi
-    mov rsi, rdx
-    mov rax, r8
-    pop r8
-    pop r9
-    ret
-
 %macro stdout 1
     mov     rax, %1
     call    f_stdout
@@ -116,4 +92,4 @@ f_stdout:
     mov     rax, 1      ; InvokeCall(SYS_WRITE)
     syscall
     ret
-
+    
