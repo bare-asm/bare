@@ -1,13 +1,6 @@
-ENDL_C     db 10, 0
-NULL_C     db 0
-
 global f_strlen
 global f_stdout
-global print
-global println
 global stdout
-global ENDL_C
-global NULL_C
 global stdin
 global f_stdin
 
@@ -34,24 +27,30 @@ f_write:
     ret
 
 %macro read 3
-    mov  rdi, 256
-    mov  rsi, 256
     mov  rax, %3
+    mov  rbx, %2
+    mov  rcx, %1
     call f_read
-    mov  %1, rdi
-    mov  %2, rsi
 %endmacro
 
+; (int fd, size_t count, char* mem) -> void
 f_read:
     ; Input: rax - The File Descriptor
-    ; Output: rdi - The Input String
-    ;         rsi - The String Length
-    mov  r9, rdi
-    mov rdi, rax
-    mov rax, 0
+    ;        rbx - Number of bytes to read
+             rcx - The Memory to Store the contents
+    push r8
+    push r9
+    mov  r8,  rax
+    mov  r9,  rbx
+    mov  rsi, rcx
+    mov  rdx, r9
+    mov  rdi, r8
+    mov  rax, 0
     syscall
-    mov rdi, rsi
-    mov rsi, rdx
+    mov  rax, r8
+    mov  rbx, r9
+    pop  r8
+    pop  r9
     ret
 
 %macro stdin 2

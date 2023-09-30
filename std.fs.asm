@@ -3,27 +3,32 @@ global f_close
 global open
 global close
 
-O_RW    : equ 1101o
-O_WRONLY: equ 0001o
-O_CREAT : equ 0100o
-O_TRUNC : equ 1000o
+O_RDWR:   equ 2
+O_WRONLY: equ 1
+O_RDONLY: equ 0
 
-S_FLAGS:  equ 644o
-
-; (char *filename, int flags, int mode) -> (int fd)
+; (char *filename, int mode) -> (int fd)
 f_open:
-  push r8 , rax
-  push r9 , rbx
-  push r10, rcx
-  mov  rdi, r8
-  mov  rsi, r9
-  mov  rdx, r10
-  mov  rax, 2
-  syscall
-  mov  rax, r8
-  mov  rbx, r9
-  mov  rcx, r10
-  pop  r8
-  pop  r9
-  pop  r8
-  ret
+    ; Save the original values of rax, and rbx in temporary registers on the stack
+    push r8
+    push r9
+    mov  r8, rax
+    mov  r9, rbx
+    
+    ; Set up the syscall number for open (rax = 2)
+    mov rdi, r8
+    mov rdx, r9
+    mov rax, 2
+
+    ; Perform the syscall (rax will contain the file descriptor)
+    syscall
+
+    ; Move the file descriptor from rax to rdi
+    ; mov [rsp], rax
+    mov rdi, rax
+
+    ; Restore the original values of rax, rbx, and rcx from the stack
+    pop r8
+    pop r9
+    ; Return with the file descriptor in rdi
+    ret
