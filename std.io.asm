@@ -37,7 +37,7 @@ f_write:
 f_read:
     ; Input: rax - The File Descriptor
     ;        rbx - Number of bytes to read
-             rcx - The Memory to Store the contents
+    ;        rcx - The Memory to Store the contents
     push r8
     push r9
     mov  r8,  rax
