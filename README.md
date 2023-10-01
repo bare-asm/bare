@@ -33,3 +33,20 @@ In BxC, any constant, let that be defined with `equ`, `db`, or simply `%define`,
 |    2      |      `SYS_OPEN`     |      `open`          |       `f_open`      |  `(char* filename, int flags, int mode) -> int fd` |
 |    3      |      `SYS_CLOSe`    |      `close`         |       `f_close`     |  `(int fd) -> void` |
 |    60     |      `SYS_EXIT`     |      `exit`          |       `f_exit`      |  `(int code) -> void` |
+
+## How to use it?
+To use it, simply download the tarball of it's source (or the latest stable release) and extract it anywhere you like. Then simply create a `_.asm` file with the following contents:
+```asm
+%include "/path/to/bare/.bare/feature.asm"
+
+; such as
+%include "/path/to/bare/.bare/std.io.asm"
+```
+And include that file wherever you want! You'll get Bare working.
+
+## Requirements
+You simply need:
+- Basic Assembly knowledge (you need to be familiar with Linux 64-bit NASM Assembly)
+- Netwide Assembler (NASM)
+- Any Linker (such as `ld`)
+- A `x86_64` PC
