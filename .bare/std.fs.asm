@@ -48,7 +48,7 @@ S_FLAG_C: equ 0777
   mov  %3, rdi
 %endmacro
 
-; (char *filename, int flags, int mode) -> (int fd)
+; (char* filename, int flags, int mode) -> (int fd)
 f_open:
     ; Save the original values of rax, and rbx in temporary registers on the stack
     push r8

@@ -28,8 +28,7 @@ _start:
     mov       rax, file
     call      f_strlen
     mov       byte [file + rdi - 1], 0
-    stdout    file
-    open           file, O_RDWR_C, rdi
+    open      file, O_RDWR_C, rdi
     read      f, SIZE, rdi
     close     rdi
     mov       rax, f

@@ -35,7 +35,7 @@ f_write:
     call f_read
 %endmacro
 
-; (int fd, size_t count, char* mem) -> void
+; (int fd, size_t count, char* contents) -> void
 f_read:
     ; Input: rax - The File Descriptor
     ;        rbx - Number of bytes to read
