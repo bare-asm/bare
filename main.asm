@@ -30,29 +30,10 @@ _start:
     mov       byte [file + rdi - 1], 0
     stdout    file
     open           file, O_RDWR_C, rdi
-    ;;;; read      [f], SIZE, 0
-    ;;;; mov       [rbx + rax], 0
-    ;;;; mov       f, rax
-    ;;;; cmp       rax, "a"
-    ;;;; jne       _err
-    ;;;; mov       rax, 1
-    ;;;; mov       rdi, 1
-    ;;;; mov       rsi, byte [f]
-    ;;;; mov       rdx, 16
-    ;;;; syscall
-    ;    read      rsp, SIZE, rdi
-    ; stdout    msg
-    ; mov       rax, 0
-    ; mov       rsi, f
-    ; mov       rdx, SIZE
-    ; mov       rdi, 0
-    ; syscall
-    ; stdout    welcome
     read      f, SIZE, rdi
     close     rdi
     mov       rax, f
     call      f_strlen
     mov       byte [f + rdi], 10
     stdout    f
-    ; stdout    end
     exit      0

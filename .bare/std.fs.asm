@@ -38,7 +38,7 @@ O_RDONLY_C: equ  0q0
 O_TRUNC_C: equ 0q1000
 O_WRONLY_C: equ 0q1
 
-S_FLAG_C: equ 0644
+S_FLAG_C: equ 0777
 
 %macro open 3
   mov  rax, %1
